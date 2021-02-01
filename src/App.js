@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Cities from "./Components/Cities/Cities";
 
 const api = {
   key: "b1451a60f85568577babe763a87da932",
@@ -7,7 +8,8 @@ const api = {
 
 const App = () => {
   const [input, setInput] = useState("");
-  const [weather, setWeather] = useState({});
+  const [weather, setWeather] = useState("");
+  const [cities, setCities] = useState([]);
 
   const search = (evt) => {
     if (evt.key === "Enter") {
@@ -16,12 +18,24 @@ const App = () => {
         .then((result) => {
           setWeather(result);
           setInput("");
+          if (typeof result.main != "undefined") {
+            setCities([
+              ...cities,
+              {
+                name: result.name,
+                temp: result.main.temp,
+                temp_max: result.main.temp_max,
+                temp_min: result.main.temp_min
+              },
+            ]);
+          }
           // console.log(result);
         });
     }
   };
+
   if (typeof weather.main == "undefined") {
-    console.log(weather)
+    console.log(cities);
     return (
       <div className="App">
         <div className="search-box">
@@ -33,11 +47,12 @@ const App = () => {
             value={input}
             onKeyPress={search}
           />
+          <Cities cities={cities}/>
         </div>
       </div>
     );
   } else {
-    console.log(weather);
+    console.log(cities);
     return (
       <div className="App">
         <div className="search-box">
@@ -49,7 +64,9 @@ const App = () => {
             value={input}
             onKeyPress={search}
           />
-          <h1>{weather.main.temp}</h1>
+          <Cities 
+          cities={cities}
+          />
         </div>
       </div>
     );
