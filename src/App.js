@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Cities from "./Components/Cities/Cities";
+import "./App.css";
 
 const api = {
   key: "b1451a60f85568577babe763a87da932",
@@ -18,18 +19,22 @@ const App = () => {
         .then((result) => {
           setWeather(result);
           setInput("");
+          console.log(result);
           if (typeof result.main != "undefined") {
             setCities([
               ...cities,
               {
+                weather: result.weather[0].main,
                 name: result.name,
+                country: result.sys.country,
                 temp: result.main.temp,
                 temp_max: result.main.temp_max,
-                temp_min: result.main.temp_min
+                temp_min: result.main.temp_min,
+                humidity: result.main.humidity,
+                wind_speed: result.wind.speed,
               },
             ]);
           }
-          // console.log(result);
         });
     }
   };
@@ -37,7 +42,7 @@ const App = () => {
   if (typeof weather.main == "undefined") {
     console.log(cities);
     return (
-      <div className="App">
+      <div className="App m-auto">
         <div className="search-box">
           <input
             type="text"
@@ -47,7 +52,9 @@ const App = () => {
             value={input}
             onKeyPress={search}
           />
-          <Cities cities={cities}/>
+          <Cities 
+          cities={cities} 
+          />
         </div>
       </div>
     );
@@ -65,7 +72,7 @@ const App = () => {
             onKeyPress={search}
           />
           <Cities 
-          cities={cities}
+          cities={cities} 
           />
         </div>
       </div>
