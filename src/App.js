@@ -45,35 +45,35 @@ const App = () => {
       <div className="App m-auto">
         <div className="search-box">
           <input
+            id="search-bar"
             type="text"
-            className="search-bar"
+            className="search-bar form-control w-25 m-auto"
             placeholder="Search..."
             onChange={(e) => setInput(e.target.value)}
             value={input}
             onKeyPress={search}
           />
-          <Cities 
-          cities={cities} 
-          />
+          <i className="fas fa-search"></i>
+          <Cities cities={cities} />
         </div>
       </div>
     );
   } else {
     console.log(cities);
     return (
-      <div className="App">
+      <div className="App m-auto">
         <div className="search-box">
           <input
+            id="search-bar"
             type="text"
-            className="search-bar"
+            className="search-bar form-control w-25 m-auto"
             placeholder="Search..."
             onChange={(e) => setInput(e.target.value)}
             value={input}
             onKeyPress={search}
           />
-          <Cities 
-          cities={cities} 
-          />
+          <i className="fas fa-search"></i>
+          <Cities cities={cities} />
         </div>
       </div>
     );
