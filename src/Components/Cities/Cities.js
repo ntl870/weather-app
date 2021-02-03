@@ -1,6 +1,5 @@
 import React from "react";
 import "./Cities.css";
-
 const Cities = (props) => {
   const Floor_temp = (tempreture) => {
     if (Math.floor(tempreture + 0.5) > Math.floor(tempreture)) {
@@ -16,7 +15,7 @@ const Cities = (props) => {
         <div className="row m-auto">
           {props.cities.map((element) => {
             let temp_icon;
-            if (element.temp > 20) {
+            if (element.temp > 10) {
               temp_icon = (
                 <h1>
                   {Floor_temp(element.temp)}&#8451;{" "}
@@ -47,13 +46,16 @@ const Cities = (props) => {
               );
             }
 
-            let weather_icon;
+            let weather_icon, background_img;
+
             if (element.weather === "Clouds") {
               weather_icon = (
                 <h2>
                   {element.weather} <i class="fas fa-clouds"></i>
                 </h2>
               );
+
+              background_img = "url(/img/clouds.jpg)";
             } else if (element.weather === "Snow") {
               weather_icon = (
                 <h2>
@@ -66,22 +68,42 @@ const Cities = (props) => {
                   {element.weather} <i class="far fa-sun"></i>
                 </h2>
               );
+              background_img = "url(/img/clear.jpg)";
             } else if (element.weather === "Mist") {
               weather_icon = (
                 <h2>
                   {element.weather} <i class="far fa-fog"></i>
                 </h2>
               );
+              background_img = "url(/img/mist.jpg)";
+            } else if (element.weather === "Rain") {
+              weather_icon = (
+                <h2>
+                  {element.weather} <i class="far fa-cloud-rain"></i>
+                </h2>
+              );
+              background_img = "url(/img/rain.jpg)";
+            }
+            else if (element.weather === "Drizzle") {
+              weather_icon = (
+                <h2>
+                  {element.weather} <i class="far fa-cloud-drizzle"></i>
+                </h2>
+              );
+              background_img = "url(/img/drizzle.jpg)";
             }
 
             return (
               <div className="text-light col-lg-6 mt-5">
-                <div id="city" className="d-block bg-primary m-auto">
+                <div
+                  id="city"
+                  className="d-block m-auto"
+                  style={{ backgroundImage: `${background_img}` }}
+                >
                   {weather_icon}
                   <h1>
                     {element.name}, {element.country}
                   </h1>
-
                   {temp_icon}
 
                   <div id="min-max" className="row">
