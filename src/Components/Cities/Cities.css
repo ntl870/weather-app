@@ -7,13 +7,26 @@
     height: 100%;
 }
 
+#main-city{
+    color:rgb(0, 0, 0);
+}
+
 #city {
     width: 400px;
-    /* height: 200px; */
+    border-radius: 30px;
+    position: relative;
     /* background-image: url("./img/clear.jpg"); */
 }
+
 
 #min-max{
     display: flex;
     justify-content: center;
+}
+
+#del-button{
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    border-width: medium;
 }
